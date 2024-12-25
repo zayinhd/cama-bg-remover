@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, send_file
 from rembg import remove
 import base64
+import io
 
 app = Flask(__name__)
 
@@ -25,8 +26,12 @@ def upload_file():
 
 @app.route('/upload/download')
 def download():
-    path = f'data:image/png;base64,{encoded_modified}'
-    return send_file(path, as_attachment=True)
+    decoded_image = base64.b64decode(encoded_modified)
+
+    image_io = io.BytesIO(decoded_image)
+
+    return send_file(
+        image_io, mimetype='image/png', as_attachment=True, download_name='cama-bg-remover.png')
 
 
 @app.route('/contact')
@@ -40,4 +45,4 @@ def about():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
