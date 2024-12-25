@@ -17,82 +17,112 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg bg-primary justify-content-evenly">
-            <a href="{{url_for('index')}}" class="text-decoration-none"
-                ><h2 class="text-light">Cama-Bg-Remover</h2></a
+        <div class="vh-100">
+            <nav
+                class="navbar navbar-expand-lg bg-primary justify-content-evenly"
             >
-            <ul class="navbar-nav nav-underline flex-row text-light">
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{{url_for('contact')}}"
-                        >Contact</a
-                    >
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{{url_for('about')}}"
-                        >About</a
-                    >
-                </li>
-            </ul>
-        </nav>
-
-        {% block body %}
-        <div>
-            <div
-                class="d-flex flex-column justify-content-space-evenly align-items-center p-3"
-            >
-                <h1 class="fs-1 fw-bold">
-                    <span class="text-primary">Remove</span>
-                    background from Image.
-                </h1>
-                <form
-                    action="/upload"
-                    method="POST"
-                    enctype="multipart/form-data"
+                <a href="{{url_for('index')}}" class="text-decoration-none"
+                    ><h2 class="text-light">Cama-Bg-Remover</h2></a
                 >
-                    <div
-                        class="d-flex flex-column justify-content-space-evenly align-items-center m-3"
+                <ul class="navbar-nav nav-underline flex-row text-light">
+                    <li class="nav-item">
+                        <a
+                            class="nav-link text-light"
+                            href="{{url_for('contact')}}"
+                            >Contact</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link text-light"
+                            href="{{url_for('about')}}"
+                            >About</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+
+            {% block body %}
+            <div>
+                <div
+                    class="d-flex flex-column justify-content-space-evenly align-items-center p-3"
+                >
+                    <h1 class="fs-1 fw-bold">
+                        <span class="text-primary">Remove</span>
+                        background from Image.
+                    </h1>
+                    <form
+                        action="/upload"
+                        method="POST"
+                        enctype="multipart/form-data"
                     >
-                        <input
-                            type="file"
-                            name="image"
-                            accept="image/*"
-                            class="bg-primary input-group-text"
-                        />
-                        <button type="submit" class="btn btn-primary mt-3">
-                            Remove Bg
-                        </button>
-                    </div>
-                </form>
+                        <div
+                            class="d-flex flex-column justify-content-space-evenly align-items-center m-3"
+                        >
+                            <input
+                                type="file"
+                                name="image"
+                                accept="image/*"
+                                class="bg-primary input-group-text"
+                            />
+                            <button type="submit" class="btn btn-primary mt-3">
+                                Remove Bg
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        {% if original_image and modified_image %}
-        <div
-            class="d-flex flex-column justify-content-space-evenly align-items-center m-3 fw-bold"
+            {% if original_image and modified_image %}
+            <div class="d-flex flex-row" id="container-img">
+                <div
+                    class="d-flex flex-column justify-content-middle align-items-center m-3 w-50"
+                >
+                    <h2 class="fw-bold">Original Image</h2>
+
+                    <image
+                        style="max-width: 200px"
+                        class="img-fluid rounded border mt-3"
+                        src="{{original_image}}"
+                    />
+                </div>
+
+                <div
+                    class="d-flex flex-column justify-content-space-evenly align-items-center m-3 w-50"
+                >
+                    <h2 class="fw-bold">New Image</h2>
+                    <image
+                        style="max-width: 200px"
+                        class="img-fluid rounded border mt-3"
+                        src="{{modified_image}}"
+                    />
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <button class="btn btn-primary">
+                    <a
+                        href="{{url_for('download')}}"
+                        class="text-white text-decoration-none"
+                        >Download</a
+                    >
+                </button>
+            </div>
+            {% endif %} {% endblock %}
+        </div>
+        <footer
+            class="navbar navbar-expand-lg bg-primary justify-content-evenly text-light"
         >
-            <div
-                class="d-flex flex-column justify-content-space-evenly align-items-center m-3"
-            >
-                <h2>Original Image</h2>
-
-                <image
-                    style="max-width: 300px"
-                    class="img-fluid rounded border mt-3"
-                    src="{{original_image}}"
-                />
-            </div>
-            <div
-                class="d-flex flex-column justify-content-space-evenly align-items-center m-3"
-            >
-                <h2>Removed Bg-Image</h2>
-                <image
-                    style="max-width: 300px"
-                    class="img-fluid rounded border mt-3"
-                    src="{{modified_image}}"
-                />
-            </div>
-            <form action=""></form>
-        </div>
-        {% endif %} {% endblock %}
+            <p>
+                © Copyright 2024. Developed by
+                <span>
+                    <a
+                        target="_blank"
+                        href="http://zayinhd.vercel.app"
+                        class="text-light"
+                        >Zayin Mikhail</a
+                    ></span
+                >
+            </p>
+        </footer>
     </body>
 </html>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from rembg import remove
 import base64
 
@@ -17,9 +17,16 @@ def upload_file():
         input_image = uploaded_file.read()
         output_image = remove(input_image)
 
-        encoded_original = base64.b64encode(input_image).decode('utf-8')
-        encoded_modified = base64.b64encode(output_image).decode('utf-8')
+    global encoded_modified
+    encoded_original = base64.b64encode(input_image).decode('utf-8')
+    encoded_modified = base64.b64encode(output_image).decode('utf-8')
     return render_template("index.html", original_image=f'data:image/png;base64,{encoded_original}', modified_image=f'data:image/png;base64,{encoded_modified}')
+
+
+@app.route('/upload/download')
+def download():
+    path = f'data:image/png;base64,{encoded_modified}'
+    return send_file(path, as_attachment=True)
 
 
 @app.route('/contact')
