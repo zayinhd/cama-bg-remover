@@ -3,7 +3,7 @@ from rembg import remove
 import base64
 import io
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", template_folder="templates")
 
 encoded_modified = None
 
