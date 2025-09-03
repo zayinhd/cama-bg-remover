@@ -7,7 +7,7 @@ A web app for removing background images from images. Built with flask and boots
 > Download the code 
 
 ```bash
-$ git clone https://github.com/app-generator/cama-bg-remover.git
+$ git clone https://github.com/zayinhd/cama-bg-remover.git
 $ cd cama-bg-remover
 ```
 
